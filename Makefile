@@ -6,7 +6,7 @@
 #    By: avatseba <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 19:00:39 by avatseba          #+#    #+#              #
-#    Updated: 2018/11/16 22:30:07 by ylisyak          ###   ########.fr        #
+#    Updated: 2018/11/18 04:18:09 by avatseba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,37 +20,39 @@ DIR_S	=	./src/
 
 DIR_O	=	./tmp/
 
-# ft library
+
 FT		= ./library/libft/
 FT_LIB	= $(addprefix $(FT),libft.a)
 FT_INC	= -I ./library/libft
 FT_LNK	= -L ./library/libft -l ft 
 
-# ft SDL2
-SDL		= ./library/sdl2/2.0.8/lib/
-SDL_LIB	= $(addprefix $(FT),libSDL2.a)
 SDL_INC	= -I ./library/sdl2/2.0.8/include/SDL2/
 SDL_LNK	= -L ./library/sdl2/2.0.8/lib/ -l SDL2
 
-# ft SDL2_image
-SDL_IMG	= ./library/sdl2_image/2.0.3/lib/
-IMG_LIB	= $(addprefix $(FT),libSDL2_image.a)
-IMG_INC	= -I ./library/sdl2_image/2.0.3/include/SDL2/
-IMG_LNK	= -L ./library/sdl2_image/2.0.3/lib/ -l SDL2_image
+IMG_INC	= -I ./library/sdl2_image/2.0.4/include/SDL2/
+IMG_LNK	= -L ./library/sdl2_image/2.0.4/lib/ -l SDL2_image
 
-# ft SDL2_mixer
-SDL_MIX	= ./library/sdl2_mixer/2.0.2_3/lib/
-MIX_LIB	= $(addprefix $(FT),libSDL2_mixer.a)
-MIX_INC	= -I ./library/sdl2_mixer/2.0.2_3/include/SDL2/
-MIX_LNK	= -L ./library/sdl2_mixer/2.0.2_3/lib/ -l SDL2_mixer
+MIX_INC	= -I ./library/sdl2_mixer/2.0.4/include/SDL2/
+MIX_LNK	= -L ./library/sdl2_mixer/2.0.4/lib/ -l SDL2_mixer
 
-# ft SDL2_ttf
-SDL_TTF	= ./library/sdl2_ttf/2.0.14/lib/
-TTF_LIB	= $(addprefix $(FT),libSDL2_mixer.a)
 TTF_INC	= -I ./library/sdl2_ttf/2.0.14/include/SDL2/
 TTF_LNK	= -L ./library/sdl2_ttf/2.0.14/lib/ -l SDL2_ttf
 
-SRC		=	main.c
+SRC		=	main.c \
+			parser.c \
+			parser_helper.c \
+			error_init.c \
+			error_read.c \
+			error_init2.c \
+			error_valid.c \
+			init.c \
+			init_wind.c \
+			upload.c \
+			core.c \
+			key.c \
+			menu.c \
+			moving.c \
+			plane_draw.c
 
 OBJ_P	=	$(addprefix $(DIR_O), $(SRC:.c=.o))
 

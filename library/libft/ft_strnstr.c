@@ -3,27 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 13:15:03 by ylisyak           #+#    #+#             */
-/*   Updated: 2017/11/21 18:34:45 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/11/08 16:51:20 by avatseba          #+#    #+#             */
+/*   Updated: 2017/11/08 20:21:28 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *dest, const char *src, size_t bits)
+char	*ft_strnstr(const char *h, const char *n, size_t len)
 {
-	size_t	lens;
+	const char	*s;
+	size_t		j;
+	size_t		i;
+	size_t		z;
 
-	if (*src == '\0')
-		return ((char *)dest);
-	lens = ft_strlen(src);
-	while (*dest != '\0' && bits-- >= lens)
+	i = 0;
+	if (*n == '\0')
+		return (char*)h;
+	while (i != len && h[i] != '\0')
 	{
-		if (*dest == *src && ft_memcmp(dest, src, lens) == 0)
-			return ((char *)dest);
-		dest++;
+		s = 0;
+		if (h[i] == n[0])
+		{
+			z = i;
+			j = 0;
+			s = &h[i];
+			while (n[j] != '\0' && n[j++] == h[z++])
+				if (n[j] == '\0' && z <= len)
+					return (char*)s;
+		}
+		i++;
 	}
-	return (NULL);
+	return (0);
 }

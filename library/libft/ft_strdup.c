@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 21:45:57 by ylisyak           #+#    #+#             */
-/*   Updated: 2017/11/15 17:54:57 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/10/31 21:10:06 by avatseba          #+#    #+#             */
+/*   Updated: 2018/09/13 15:53:09 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t		ft_len(const char *s1)
+char	*ft_strdup(const char *str)
 {
-	size_t	i;
+	int			i;
+	int			counter;
+	char		*pntr;
 
 	i = 0;
-	while (*s1++)
-		i++;
-	return (i);
-}
-
-char				*ft_strdup(const char *s1)
-{
-	char	*ptr;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = ft_len(s1);
-	if (!(ptr = (char*)malloc(sizeof(*ptr) * (len + 1))))
-		return (NULL);
-	while (i < len)
+	counter = 0;
+	while (str[i] != '\0')
 	{
-		ptr[i] = s1[i];
+		i++;
+		counter++;
+	}
+	i = 0;
+	pntr = (char *)malloc(counter * sizeof(*pntr) + 1);
+	if (!pntr)
+	{
+		return (NULL);
+	}
+	while (str[i] != '\0')
+	{
+		pntr[i] = str[i];
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	pntr[i] = '\0';
+	return (pntr);
 }

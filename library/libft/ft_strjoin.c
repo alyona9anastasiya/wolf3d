@@ -3,32 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 16:14:23 by ylisyak           #+#    #+#             */
-/*   Updated: 2018/08/17 19:06:56 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/11/17 16:33:44 by avatseba          #+#    #+#             */
+/*   Updated: 2018/09/13 15:54:21 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		l;
-	char	*strnew;
+	int		i;
+	char	*pntr;
 
-	strnew = NULL;
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	else if (s1 && !s2)
-		return (ft_strdup(s1));
-	else if (s1 && s2)
+	i = 0;
+	if (!s1 || !s2)
 	{
-		l = ft_strlen(s1) + ft_strlen(s2);
-		if (!(strnew = (char *)malloc(sizeof(char) * (l + 1))))
-			return (NULL);
-		ft_strcpy(strnew, s1);
-		ft_strcat(strnew, s2);
+		return (NULL);
 	}
-	return (strnew);
+	pntr = (char *)malloc((ft_strlen(s1) + ft_strlen(s2)) * sizeof(char) + 1);
+	if (!pntr)
+	{
+		return (NULL);
+	}
+	ft_strcpy(pntr, s1);
+	ft_strcat(pntr, s2);
+	return (pntr);
 }

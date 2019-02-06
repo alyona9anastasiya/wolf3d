@@ -3,75 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 15:44:56 by ylisyak           #+#    #+#             */
-/*   Updated: 2018/08/19 22:02:56 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/11/20 13:36:09 by avatseba          #+#    #+#             */
+/*   Updated: 2017/11/20 14:51:20 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int				itoasize(unsigned int n)
+char	*ft_itoa(int n)
 {
-	int		i;
+	char		*c;
+	int			start;
+	int			len;
+	long long	res;
 
-	i = 0;
-	while (n >= 1)
+	start = 0;
+	res = (long long)n;
+	len = ft_itoa_aslan(res);
+	c = (char*)malloc(sizeof(char) * (len + 1));
+	if (c == 0)
+		return (0);
+	c[len] = '\0';
+	if (res < 0)
 	{
-		n /= 10;
-		i++;
+		c[start++] = '-';
+		res = -res;
 	}
-	return (i);
-}
-
-static unsigned int		ifnegative(int *dig, int *chk, int *len)
-{
-	unsigned int	newd;
-
-	newd = 0;
-	if (*dig < 0)
+	while (len > 0 && len > start)
 	{
-		*chk = 1;
-		newd = (unsigned int)*dig * -1;
-		*len = itoasize(newd);
-		*len += 1;
-		return (newd);
+		c[--len] = (res % 10) + '0';
+		res = res / 10;
 	}
-	else if (*dig == 0)
-	{
-		*len += 1;
-		return (*dig);
-	}
-	else
-	{
-		*len = itoasize(*dig);
-		return (*dig);
-	}
-}
-
-char					*ft_itoa(int n)
-{
-	char			*str;
-	int				check;
-	int				lens;
-	unsigned int	g;
-	unsigned int	d;
-
-	g = 0;
-	check = 0;
-	lens = 0;
-	d = ifnegative(&n, &check, &lens);
-	if (!(str = (char *)malloc(sizeof(char) * (lens + 1))))
-		return (NULL);
-	str[lens] = '\0';
-	while (lens > 0)
-	{
-		g = d % 10;
-		d = d / 10;
-		str[--lens] = (char)g + '0';
-	}
-	if (check == 1)
-		str[lens] = '-';
-	return (str);
+	return (c);
 }

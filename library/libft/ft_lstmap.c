@@ -3,33 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/21 17:28:55 by ylisyak           #+#    #+#             */
-/*   Updated: 2017/11/21 17:48:32 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/11/28 14:19:59 by avatseba          #+#    #+#             */
+/*   Updated: 2017/11/28 14:20:30 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list	*nptr;
-	t_list	*tmp;
-	t_list	*strt;
+	t_list	*new;
+	t_list	*nelem;
+	t_list	*pred;
 
-	tmp = f(lst);
-	if (!(nptr = ft_lstnew(tmp->content, tmp->content_size)))
-		return (NULL);
-	strt = nptr;
-	lst = lst->next;
-	while (lst)
+	new = NULL;
+	if (lst && (*f))
 	{
-		tmp = f(lst);
-		if (!(nptr->next = ft_lstnew(tmp->content, tmp->content_size)))
-			return (NULL);
-		nptr = nptr->next;
+		new = (*f)(lst);
+		pred = new;
 		lst = lst->next;
+		while (lst)
+		{
+			nelem = (*f)(lst);
+			pred->next = nelem;
+			pred = nelem;
+			lst = lst->next;
+		}
+		pred->next = NULL;
 	}
-	return (strt);
+	return (new);
 }

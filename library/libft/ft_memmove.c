@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 17:02:37 by ylisyak           #+#    #+#             */
-/*   Updated: 2017/11/15 17:40:34 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/10/31 15:11:34 by avatseba          #+#    #+#             */
+/*   Updated: 2017/10/31 15:11:36 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *to, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*from;
-	char	*dest;
-	size_t	i;
+	size_t i;
 
-	i = -1;
-	from = (char *)src;
-	dest = (char *)to;
-	if (from < dest)
-		while ((int)(--n) >= 0)
-			*(dest + n) = *(from + n);
+	if (len == 0)
+		return (dst);
+	if (src < dst)
+	{
+		i = len;
+		while (i > 0)
+		{
+			i--;
+			((char *)dst)[i] = ((char *)src)[i];
+		}
+	}
 	else
-		while (++i < n)
-			*(dest + i) = *(from + i);
-	return (dest);
+	{
+		i = 0;
+		while (i < len)
+		{
+			((char *)dst)[i] = ((char *)src)[i];
+			i++;
+		}
+	}
+	return (dst);
 }

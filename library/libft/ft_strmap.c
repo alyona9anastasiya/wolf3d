@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 18:24:58 by ylisyak           #+#    #+#             */
-/*   Updated: 2017/11/15 18:07:25 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/11/15 18:38:39 by avatseba          #+#    #+#             */
+/*   Updated: 2017/11/15 19:19:15 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,20 @@
 
 char	*ft_strmap(char const *s, char (*f)(char))
 {
-	char	*cs;
-	size_t	lens;
-	size_t	i;
+	char	*d;
+	int		i;
 
 	i = 0;
-	cs = NULL;
-	if (s && f)
+	if (!s || !f)
+		return (NULL);
+	d = (char*)malloc(sizeof(*s) * ft_strlen(s) + 1);
+	if (!d)
+		return (NULL);
+	while (s[i])
 	{
-		lens = ft_strlen((char*)s);
-		cs = (char*)malloc(sizeof(char) * (lens + 1));
-		if (cs != NULL)
-		{
-			while (s[i] != 0)
-			{
-				cs[i] = f(s[i]);
-				i++;
-			}
-			cs[i] = '\0';
-			return ((char*)cs);
-		}
+		d[i] = f(s[i]);
+		i++;
 	}
-	return (NULL);
+	d[i] = '\0';
+	return (d);
 }

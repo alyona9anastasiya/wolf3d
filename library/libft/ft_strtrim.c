@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 15:58:41 by ylisyak           #+#    #+#             */
-/*   Updated: 2017/11/15 21:14:07 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/11/17 18:16:29 by avatseba          #+#    #+#             */
+/*   Updated: 2017/11/17 19:25:45 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,22 @@
 
 char	*ft_strtrim(char const *s)
 {
-	int		i;
-	int		len;
-	char	*str;
+	char	*d;
+	size_t	i;
+	size_t	e;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	len = ft_strlen((char*)s);
-	while (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n')
-		len--;
 	i = 0;
-	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-	{
-		len--;
+	e = ft_strlen(s);
+	while (ft_iswhitespaces(s[i]))
 		i++;
-	}
-	if (len <= 0)
-		len = 0;
-	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
+	while (ft_iswhitespaces(s[e - 1]))
+		e--;
+	if (e < i)
+		e = i;
+	d = ft_strnew(e - i);
+	if (!d)
 		return (NULL);
-	s += i;
-	i = 0;
-	while (i < len)
-		str[i++] = *s++;
-	str[i] = '\0';
-	return (str);
+	return (ft_strncpy(d, s + i, e - i));
 }

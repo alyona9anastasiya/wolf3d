@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylisyak <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avatseba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 06:20:41 by ylisyak           #+#    #+#             */
-/*   Updated: 2017/11/17 07:48:09 by ylisyak          ###   ########.fr       */
+/*   Created: 2017/11/15 19:56:28 by avatseba          #+#    #+#             */
+/*   Updated: 2017/11/15 19:58:23 by avatseba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 void	ft_putchar(char c)
 {
-	if (c || ft_isascii(c))
-		write(1, &c, 1);
-	else
-		write(1, &c, 3);
+	write(1, &c, 1);
 }
